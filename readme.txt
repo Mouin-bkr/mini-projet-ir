@@ -1,39 +1,60 @@
-# 📊 Mini-Projet 1: Système de Recherche d'Information Économique
-## Reuters-21578 IR Pipeline - ISAMM Manouba (MAP = 0.848)
+Information Retrieval (IR) system. Processes the Reuters-21578 corpus (7,770 economic news articles across 90 categories like earn, acq, crude, grain) to build an inverted index, TF-IDF vectors, and ranking pipeline.​
 
-[![ISAMM Manouba](https://img.shields.io/badge/ISAMM-Manouba-blue)](https://isa2m.rnu.tn)
-[![Python](https://img.shields.io/badge/Python-3.12-green)](https://www.python.org)
-[![NLTK](https://img.shields.io/badge/NLTK-3.8-orange)](https://www.nltk.org)
-[![Scikit-learn](https://img.shields.io/badge/scikit--learn-1.3-blue)](https://scikit-learn.org)
+Key Results: MAP = 0.848 (outperforms typical Reuters baselines ~0.4-0.6), P@10 = 0.77. Ablation study shows stemming + stopwords optimal (+0.4% MAP, -15% vocabulary). Includes Rocchio feedback and evaluation on 8 queries (cocoa, oil, earnings, etc.).​
 
-Système de Recherche d'Information (RI) complet sur le corpus Reuters-21578, implémentant indexation inversée, modélisation TF-IDF, classement cosinus, évaluation IR (P@10, MAP), feedback Rocchio, et étude d'ablation des prétraitements. Projet universitaire ISAMM Manouba - Techniques d'Indexation et de Référencement (Pr. Chiraz Trabelsi).
+Project Overview
+Inverted Index: 5,895 economic terms → (doc_id, TF) postings (JSON, 2.1MB)
 
-## 🎯 Objectifs Pédagogiques
-- [x] **Index Inversé** : 5,895 termes économiques → (doc_id, TF) postings (JSON)
-- [x] **TF-IDF** : 500 docs × 2,828 features, L2-normalisé, min_df=2
-- [x] **Requêtes** : 8 thématiques économiques (cocoa, oil, earn, acq...)
-- [x] **Évaluation** : **MAP = 0.848**, P@10 = 0.77 (supérieur baseline Reuters ~0.6)
-- [x] **Rocchio** : Feedback pertinence (+/-0.037 AP sur "oil market")
-- [x] **Ablation** : Stops + stemming optimal (MAP +0.4%, vocab -15%)
+TF-IDF Model: 500 docs × 2,828 features, L2-normalized, min_df=2
 
-## 📈 Résultats Clés
-| Requête | Pertinents | P@10 | R@10 | AP | Top-3 Docs |
-|---------|------------|------|------|----|------------|
-| cocoa prices | 15 | **1.00** | 0.67 | 1.00 | [318,489,319] |
-| acquisition deal | 81 | **1.00** | 0.12 | 1.00 | [323,69,430] |
-| oil market | 33 | 0.90 | 0.27 | 0.84 | [49,208,122] |
-| company earnings | 167 | 0.80 | 0.05 | 0.64 | [382,381,285] |
-| **MOYENNE (MAP)** | | **0.848** | | | |
+Ranking: Cosine similarity for top-k results (e.g., "cocoa prices" P@10=1.00)
 
-**Ablation Study**: Stops + stemming = MAP 0.762 (meilleur), vocab 1,086 vs 1,282 baseline (-15%) [chart:184].
+Evaluation: Precision@10, Recall@10, AP, MAP on 7 queries (perfect on cocoa/acq)
 
-## 🛠️ Technologies
-- **Corpus**: Reuters-21578 (NLTK) - 7.7k docs économiques, 90 catégories
-- **Indexation**: Python defaultdict, NLTK tokenization
-- **Vectorisation**: scikit-learn TF-IDF (L2-norm, min_df=2)
-- **Ranking**: Cosine similarity, NumPy arg-sort
-- **Évaluation**: P@10, R@10, AP, MAP (pandas)
-- **Visualisation**: matplotlib (ablation plots)
-- **Gestion**: Git, GitHub, Jupyter Notebook
+Ablation: 4 configs tested (stops ON/OFF, stemming ON/OFF) – stops+stemming best
 
-## 📁 Structure du Projet
+Feedback: Rocchio algorithm (α=1.0, β=0.75, γ=0.15) – minor AP improvement (-4.4% on oil query)
+
+Project Structure 
+
+  mini-projet-ir/
+  ├── mini_projet1.py          # Main IR pipeline (indexing, TF-IDF, ranking, eval)
+  ├── MiniProjet1_IR.ipynb     # Jupyter notebook with analysis & plots
+  ├── inverted_index.json      # 5,895 terms index
+  ├── evaluation_metrics.csv   # P@10=0.77, MAP=0.848 results
+  ├── ablation_results.csv     # Preprocessing ablation (4 configs)
+  ├── requirements.txt         # Dependencies (NLTK, scikit-learn, pandas)
+  └── .gitignore               # Excludes .idea, __pycache__
+
+Installation
+
+  # Clone repo
+  git clone https://github.com/mouinbkr/mini-projet-ir.git
+  cd mini-projet-ir
+  
+  # Virtual environment
+  python -m venv venv
+  source venv/bin/activate  # Linux/Mac
+  # venv\Scripts\activate    # Windows
+  
+  # Install dependencies
+  pip install -r requirements.txt
+  
+  # Download NLTK data (Reuters corpus, stopwords, tokenizer)
+  python -c "import nltk; nltk.download(['reuters', 'punkt_tab', 'stopwords'])"
+
+Execution 
+  
+  # Run main script (full pipeline, ~5min for 500 docs)
+  python mini_projet1.py
+  
+  # Or open Jupyter notebook for interactive analysis
+  jupyter notebook MiniProjet1_IR.ipynb
+
+
+Author & Contact
+
+  Mouin Boubakri - Final-year CS student, ISAMM Manouba
+  Portfolio: mouinboubakri.tech
+  GitHub: mouin-bkr
+  LinkedIn: Mohamed Mouin Boubakri
