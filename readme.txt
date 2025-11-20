@@ -98,4 +98,3 @@ Portfolio: [mouinboubakri.tech](https://mouinboubakri.tech)
 GitHub: [mouin-bkr](https://github.com/mouin-bkr)  
 LinkedIn: [Mohamed Mouin Boubakri](https://linkedin.com/in/mohamed-mouin-boubakri)
 
-*Academic project for ISAMM Manouba - MAP=0.848 on Reuters-21578. Open to collaborations in IR/ML/DevOps.*
