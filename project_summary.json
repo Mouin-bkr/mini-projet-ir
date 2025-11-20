@@ -1,0 +1,20 @@
+{
+  "project_title": "ISAMM Mini-Projet 1: Economic News Retrieval System",
+  "corpus": "Reuters-21578",
+  "documents_processed": 500,
+  "unique_categories": 60,
+  "inverted_index_terms": 5895,
+  "tfidf_features": 2828,
+  "queries_evaluated": 8,
+  "mean_average_precision": 0.8482410556815319,
+  "best_ablation_config": "with_stemming",
+  "best_ablation_map": 0.7615765486088615,
+  "rocchio_sample_improvement": -0.03705908289241622,
+  "files_generated": [
+    "inverted_index.json",
+    "tfidf_vocabulary.txt",
+    "evaluation_metrics.csv",
+    "ablation_study_results.csv",
+    "ablation_study_results.png"
+  ]
+}
