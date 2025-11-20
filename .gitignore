@@ -1,10 +1,12 @@
 .idea/
-.idea/workspace.xml
-# Ignore generated files and IDE configs
+.ipynb_checkpoints/
 *.csv
 *.json
 *.png
-.ipynb_checkpoints/
-.idea/
 __pycache__/
-
+*.pyc
+venv/
+env/
+.DS_Store
+*.log
+*.sqlite3
